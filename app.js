@@ -11,3 +11,6 @@ app.get('/test', function(req, res){
 app.listen(8888, function() {
     console.log('start server');
 });
+
+var db = require('dbscript.js');
+db.init();
