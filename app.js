@@ -72,3 +72,6 @@ app.post('/deleteStep', (req, res) => {
 app.listen(8080, () => {
     console.log('start server');
 });
+
+var db = require('dbscript.js');
+db.init();
