@@ -1133,11 +1133,15 @@ i.fa.fa-twitter {
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
 }
-.blank-page p{
-	font-size: 0.9em;
+.blank-page h3{
+	font-size: 1.5em;
   	color: #999;
   	line-height: 2em;
 	font-family: 'Muli-Regular';
+}
+.blank-page img {
+    max-width: 301px;
+    
 }
 /*--//blank--*/
 /*--grid--*/
@@ -1399,7 +1403,7 @@ label.control-label {
 .login-mail{
 	border: 1px solid #E9E9E9;
 	margin-bottom: 2em;
-	padding: 0.5em 1em;
+	 padding: 20px 10px;
 }
 .login-mail i{
 	color: #999;
@@ -1958,107 +1962,7 @@ tr.table-row {
 .tab-content-in{
 	margin:0;
 }
-/*--graph--*/
-.graph-2 {
-    padding-left: 8px;
-}
-.graph-1 {
-    padding-right: 8px;
-}
-.graph-5 {
-    padding-left: 8px;
-}
-.graph-4 {
-    padding: 0 8px;
-}
-.graph-3 {
-    padding-right: 8px;
-}
-.grid-1{
-	background-color: #fff;
-    padding: 1.8em;
-    border: 1px solid #ebeff6;
-    border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-o-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
-}
-.graph h4{
-    font-size: 2em;
-    text-align: center;
-    margin-bottom: 1em;
-}
-.grid-graph {
-    float: left;
-    width: 36%;
-    padding-right: 7%;
-    padding-top: 10%;
-}
-.grid-graph1 {
-    font-size: 12px;
-    border: 1px solid #E6E6E6;
-    padding: 10px;
-}
-#os-Win-lbl {
-    border-left: #1ABC9C solid 1em;
-    padding-left: .5em;
-    font-size: 1em;
-    color: #777F8C;    
-}
-.grid-graph div {
-    margin: 3px 0;
-}
-#os-Other-lbl {
-    border-left: #510356 solid 1em;
-    padding-left: .5em;
-    font-size: 1em;
-    color: #777F8C;
-}
-#os-Mac-lbl {
-    border-left: #3BB2D0 solid 1em;
-    padding-left: .5em;
-    font-size: 1em;
-    color: #777F8C;
-}
-.grid-graph span {
-    float: right;
-    padding-left: .5em;
-}
 
-.grid-2{
-	float: left;
-}
-.graph-box1 {
-    margin: 1em 0;
-}
-.graph {
-    padding: 1em 0;
-}
-/*--404--*/
-.four{
-	text-align: center;
-	    padding: 3em 0;
-}
-.four a{
-	font-size: 0.9em;
-    padding: 0.5em 1em;
-    color: #fff;
-    display: block;
-    text-decoration: none;
-    background: #510356;
-    margin: 0 auto;
-    width: 10%;
-}
-.four p{
-	font-size: 1em;
-    padding: 0.5em 0em 2em;
-    display: block;
-        font-family: 'Muli-Regular';
-
-}
 /*--footer--*/
 .copy-right {
     padding-top: 5em;
