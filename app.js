@@ -58,5 +58,5 @@ app.listen(8080, () => {
     console.log('start server');
 });
 
-var db = require('dbscript.js');
-db.init();
+var db = require('./dbscript.js');
+db.init_db();
