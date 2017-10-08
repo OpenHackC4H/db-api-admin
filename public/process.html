@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!DOCTYPE HTML5>
 <html>
 <head>
 <title>TeddyBear</title>
@@ -19,10 +19,10 @@
 <script src="js/screenfull.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <style>
-  #gallery { float: left; width: 65%; min-height: 12em; }
+  #gallery { float: left; width: 65%; min-height: 12em; padding: 5px;}
   .gallery li {   list-style-type: none; }
   .gallery.custom-state-active { background: #eee; }
-  .gallery li { float: left; width: 300px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+  .gallery li { float: left; width: 300px; padding: 0.8em; margin: 0 0.4em 0.4em 0; text-align: center; }
   .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
   .gallery li a { float: right; }
   .gallery li a.ui-icon-zoomin { float: left; }
@@ -33,23 +33,31 @@
   #process h4 .ui-icon { float: left; }
   #process .gallery h5 { display: none; }
   #process a { float: right; line-height: 16px;}
+  
+  #successSave {color: green; line-height:20px;}
   </style>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $(document).ready( function() {
 	var processes = null;
-
+	$('#successSave').hide();
 	$.get('/getProcesses', function(data) {
 			processes = data;
 		
 		var $steps = processes[0].steps;
 		var temp;
+		console.log($steps);
 		$.each($steps,function(index, value){
 		    var tempid = value.objid;
-			temp = document.getElementById(tempid);
-			console.log(temp);
-			//addtoProcess(temp);
+			//temp = document.getElementById(tempid);
+			console.log(tempid);
+			temp = "#".concat(tempid);
+			
+			var event = jQuery.Event('click');
+			event.target = "a.ui-icon-circle-arrow-e";
+			$(temp).trigger(event);
+			
 		});
 	});
     // There's the gallery and the process
@@ -90,7 +98,7 @@
  
 	var $array = [];
     // Image deletion function
-    var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Remove from Process' class='ui-icon ui-icon-refresh'>Remove from Process</a>";
+    var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Remove from Process' class='ui-icon ui-icon-circle-arrow-w'>Remove from Process</a>";
     function addtoProcess( $item ) {
 	  console.log($item);
       $item.fadeOut(function() {
@@ -177,7 +185,7 @@
 			contentType : 'application/json',
 			type : 'POST',
 			success: function(response) {
-				console.log("success");
+				$('#successSave').show().delay(5000).fadeOut();
 			}
 		});
 	});
@@ -319,6 +327,7 @@
 <div id="process" class="ui-widget-content ui-state-default">
   <h4 class="ui-widget-header"> Process </h4>
   <a title="Save Process" class="save fa fa-floppy-o">  Save Process</a>
+  <div id="successSave">Process is updated successfully!</div>
 </div>
  
 </div>
