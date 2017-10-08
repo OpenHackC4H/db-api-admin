@@ -1,4 +1,4 @@
-<!DOCTYPE HTML5>
+<!DOCTYPE HTML>
 <html>
 <head>
 <title>TeddyBear</title>
@@ -22,7 +22,7 @@
   #gallery { float: left; width: 65%; min-height: 12em; padding: 5px;}
   .gallery li {   list-style-type: none; }
   .gallery.custom-state-active { background: #eee; }
-  .gallery li { float: left; width: 300px; padding: 0.8em; margin: 0 0.4em 0.4em 0; text-align: center; }
+  .gallery li { float: left; width: 300px; padding: 0.em; margin: 0 0.4em 0.4em 0; text-align: center; }
   .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
   .gallery li a { float: right; }
   .gallery li a.ui-icon-zoomin { float: left; }
@@ -47,11 +47,9 @@
 		
 		var $steps = processes[0].steps;
 		var temp;
-		console.log($steps);
 		$.each($steps,function(index, value){
 		    var tempid = value.objid;
 			//temp = document.getElementById(tempid);
-			console.log(tempid);
 			temp = "#".concat(tempid);
 			
 			var event = jQuery.Event('click');
@@ -100,7 +98,6 @@
     // Image deletion function
     var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Remove from Process' class='ui-icon ui-icon-circle-arrow-w'>Remove from Process</a>";
     function addtoProcess( $item ) {
-	  console.log($item);
       $item.fadeOut(function() {
         var $list = $( "ul", $process ).length ?
           $( "ul", $process ) :
@@ -118,11 +115,11 @@
     }
  
     // Image recycle function
-    var process_icon = "<a href='link/to/process/script/when/we/have/js/off' title='Add to Process' class=' ui-icon-circle-arrow-e'>Add to Process</a>";
+    var process_icon = "<a href='link/to/process/script/when/we/have/js/off' title='Add to Process' class='ui-icon ui-icon-circle-arrow-e'>Add to Process</a>";
     function removefromProcess( $item ) {
       $item.fadeOut(function() {
         $item
-          .find( "a. ui-icon-circle-arrow-w" )
+          .find( "a.ui-icon-circle-arrow-w" )
             .remove()
           .end()
           .css( "width", "300px")
@@ -279,13 +276,11 @@
   <li class="ui-widget-content ui-corner-tr" id="1">
     				<div class="blank-page">
 							<audio controls>
-							  <source src="images/a1.m4a">
+							  <source src="images/1.mp3">
 				 
 							</audio>
-							<img src="images/pic1.png" alt="" />
-							<div class="blank-page-des">
-								<h3>Lorem Ipsum is simply</h3>
-							</div>
+							<img src="images/1_white.jpg" alt="" />
+
 							
 						</div>
 		
@@ -294,13 +289,10 @@
   <li class="ui-widget-content ui-corner-tr" id="2">
     <div class="blank-page">
 							<audio controls>
-							  <source src="images/a3.m4a" type="audio/mp4">
+							  <source src="images/2.mp3" type="audio/mp3">
 				 
 							</audio>
-							<img src="images/pic3.png" alt="" />
-							<div class="blank-page-des">
-								<h3>Lorem Ipsum is simply</h3>
-							</div>
+							<img src="images/2_white.jpg" alt="" />
 							
 						</div>
 			
@@ -310,13 +302,11 @@
     						<div class="blank-page">
 							<audio controls>
 							 
-							  <source src="images/a2.m4a" type="audio/mp4">
+							  <source src="images/3.mp3" type="audio/mp3">
 				 
 							</audio>
-							<img src="images/pic2.png" alt="" />
-							<div class="blank-page-des">
-								<h3>Lorem Ipsum is simply</h3>
-							</div>
+							<img src="images/3_white.jpg" alt="" />
+
 							
 						</div>
 			
