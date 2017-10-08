@@ -26,14 +26,14 @@ var init_version = 0;
 steps.remove();
 
 //Create Step1 document 	
-var img1 = "./sample_data/Rattigheter.PNG";
+var img1 = "./sample_data/1_white.jpg";
 var base64_img1 = base64_encode(img1);
-var base64_snd1 = base64_encode('./sample_data/rattigheter.m4a');
+var base64_snd1 = base64_encode('./sample_data/1.mp3');
 //var id1 = new ObjectID();
 var id1 = 1;
 steps.insert({
 	_id:  id1,
-	description: "Rattigheter",			
+	description: "Slide 1",			
 	version: init_version,
 	image: base64_img1,
 	sound: base64_snd1
@@ -41,40 +41,26 @@ steps.insert({
 
 
 //Create Step2 document
-var base64_img2 = base64_encode("./sample_data/Att_vanta_pa_svar_red.png");
-var base64_snd2 = base64_encode('./sample_data/Att_vanta_pa_svar.m4a');
+var base64_img2 = base64_encode("./sample_data/2_white.jpg");
+var base64_snd2 = base64_encode('./sample_data/2.mp3');
 //var id2 = new ObjectID();
 var id2 = 2;
 steps.insert({
 	_id: id2,
-	description: "Att vänta på svar red",			
+	description: "Slide 2",			
 	version: init_version,
 	image: base64_img2,
 	sound: base64_snd2
 });
 
-//Create Step4 document
-var base64_img4 = base64_encode("./sample_data/att_vara_asylsokande_red.png");
-var base64_snd4 = base64_encode('./sample_data/Att_vara_asylsokande.m4a');
-//var id4 = new ObjectID();
-var id4 = 4;
-steps.insert({
-	_id: id3,
-	description: "Att vara asylsokande",			
-	version: init_version,
-	image: base64_img4,
-	sound: base64_snd4
-});
-
-
 //Create Step3 document
-var base64_img3 = base64_encode("./sample_data/fingeravtryck_red.png");
-var base64_snd3 = base64_encode('./sample_data/Fingeravtryck.m4a');
+var base64_img3 = base64_encode("./sample_data/3_white.jpg");
+var base64_snd3 = base64_encode('./sample_data/3.mp3');
 //var id3 = new ObjectID();
 var id3 = 3;
 steps.insert({
 	_id:  id3,
-	description: "fingeravtryck",			
+	description: "Slide 3",			
 	version: init_version,
 	image: base64_img3,
 	sound: base64_snd3
@@ -100,11 +86,6 @@ processCollection.insert({
 		{
 			objid: id3,
 			prev: id2,
-			next: id4
-		},
-		{
-			objid: id4,
-			prev: id3,
 			next: null
 		}
 		],
