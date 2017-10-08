@@ -22,7 +22,7 @@
   #gallery { float: left; width: 65%; min-height: 12em; padding: 5px;}
   .gallery li {   list-style-type: none; }
   .gallery.custom-state-active { background: #eee; }
-  .gallery li { float: left; width: 300px; padding: 0.em; margin: 0 0.4em 0.4em 0; text-align: center; }
+  .gallery li { float: left; width: 340px; padding: 0.em; margin: 0 0.4em 0.4em 0; text-align: center; }
   .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
   .gallery li a { float: right; }
   .gallery li a.ui-icon-zoomin { float: left; }
@@ -107,7 +107,7 @@
         $item.find( "a.ui-icon-circle-arrow-e" ).remove();
         $item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
           $item
-            .animate({ width: "300px" })
+            .animate({ width: "340px" })
             .find( "img" )
               .animate({ height: "36px" });
         });
@@ -122,7 +122,7 @@
           .find( "a.ui-icon-circle-arrow-w" )
             .remove()
           .end()
-          .css( "width", "300px")
+          .css( "width", "340px")
           .append( process_icon )
           .find( "img" )
             .css( "height", "142px" )
