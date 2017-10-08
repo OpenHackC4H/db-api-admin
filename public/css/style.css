@@ -1141,8 +1141,8 @@ i.fa.fa-twitter {
 	font-family: 'Muli-Regular';
 }
 .blank-page img {
-    max-width: 400px;
-    
+    width: 100%; 
+	cursor: move;
 }
 /*--//blank--*/
 /*--grid--*/
