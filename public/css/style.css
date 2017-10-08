@@ -28,6 +28,35 @@ body a{
 div#wrapper {
     background-color: #fff;
 }
+
+.processTableLeft {
+	float:left; 
+	width:49%;  
+	border: solid; 
+	margin-left:5px;
+	overflow: auto;
+}
+
+.processTableLeft h2{
+	color: #510356;
+	font-family: Lucida Console, Monospace;
+}
+
+.processTableRight {
+	float:right; 
+	width:49%; 
+	border: solid; 
+	margin-right: 5px;
+	overflow: auto;
+}
+
+.processTableRight h2{
+	color: #510356;
+	font-family: Lucida Console, Monospace;
+}
+.TableMain {
+	style="width:100%;"
+}
 /*-- header --*/
 .navbar .navbar-nav li a {
   padding: 0 10px;
@@ -2731,3 +2760,4 @@ ul.dropdown-menu.dropdown-menu-right {
     display: block;
     width: 300px;
 }
+

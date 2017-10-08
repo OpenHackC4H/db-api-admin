@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Migration</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TeddyBear</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
@@ -17,11 +17,193 @@
 <link href="css/custom.css" rel="stylesheet">
 <script src="js/custom.js"></script>
 <script src="js/screenfull.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+  #gallery { float: left; width: 65%; min-height: 12em; }
+  .gallery li {   list-style-type: none; }
+  .gallery.custom-state-active { background: #eee; }
+  .gallery li { float: left; width: 300px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+  .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+  .gallery li a { float: right; }
+  .gallery li a.ui-icon-zoomin { float: left; }
+  .gallery li img { width: 100%; cursor: move; }
+ 
+  #process { float: right; width: 32%; min-height: 18em; padding: 1%; }
+  #process h4 { line-height: 20px; margin: 0 0 0.4em; }
+  #process h4 .ui-icon { float: left; }
+  #process .gallery h5 { display: none; }
+  #process a { float: right; line-height: 16px;}
+  </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $(document).ready( function() {
+	var processes = null;
 
+	$.get('/getProcesses', function(data) {
+			processes = data;
+		
+		var $steps = processes[0].steps;
+		var temp;
+		$.each($steps,function(index, value){
+		    var tempid = value.objid;
+			temp = document.getElementById(tempid);
+			console.log(temp);
+			//addtoProcess(temp);
+		});
+	});
+    // There's the gallery and the process
 
-<!--skycons-icons-->
-<script src="js/skycons.js"></script>
-<!--//skycons-icons-->
+    var $gallery = $( "#gallery" ),
+      $process = $( "#process" );
+ 
+    // Let the gallery items be draggable
+    $( "li", $gallery ).draggable({
+      cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+      revert: "invalid", // when not dropped, the item will revert back to its initial position
+      containment: "document",
+      helper: "clone",
+      cursor: "move"
+    });
+ 
+    // Let the process be droppable, accepting the gallery items
+    $process.droppable({
+      accept: "#gallery > li",
+      classes: {
+        "ui-droppable-active": "ui-state-highlight"
+      },
+      drop: function( event, ui ) {
+        addtoProcess( ui.draggable );
+      }
+    });
+ 
+    // Let the gallery be droppable as well, accepting items from the process
+    $gallery.droppable({
+      accept: "#process li",
+      classes: {
+        "ui-droppable-active": "custom-state-active"
+      },
+      drop: function( event, ui ) {
+        removefromProcess( ui.draggable );
+      }
+    });
+ 
+	var $array = [];
+    // Image deletion function
+    var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Remove from Process' class='ui-icon ui-icon-refresh'>Remove from Process</a>";
+    function addtoProcess( $item ) {
+	  console.log($item);
+      $item.fadeOut(function() {
+        var $list = $( "ul", $process ).length ?
+          $( "ul", $process ) :
+          $( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $process );
+		var id = $item.attr('id');
+		$array.push(id);
+        $item.find( "a.ui-icon-circle-arrow-e" ).remove();
+        $item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
+          $item
+            .animate({ width: "300px" })
+            .find( "img" )
+              .animate({ height: "36px" });
+        });
+      });
+    }
+ 
+    // Image recycle function
+    var process_icon = "<a href='link/to/process/script/when/we/have/js/off' title='Add to Process' class=' ui-icon-circle-arrow-e'>Add to Process</a>";
+    function removefromProcess( $item ) {
+      $item.fadeOut(function() {
+        $item
+          .find( "a. ui-icon-circle-arrow-w" )
+            .remove()
+          .end()
+          .css( "width", "300px")
+          .append( process_icon )
+          .find( "img" )
+            .css( "height", "142px" )
+          .end()
+          .appendTo( $gallery )
+          .fadeIn();
+		  $array.splice($.inArray($item.attr('id'), $array),1);
+      });
+    }
+ 
+    // Image preview function, demonstrating the ui.dialog used as a modal window
+    function viewLargerImage( $link ) {
+      var src = $link.attr( "href" ),
+        title = $link.siblings( "img" ).attr( "alt" ),
+        $modal = $( "img[src$='" + src + "']" );
+ 
+      if ( $modal.length ) {
+        $modal.dialog( "open" );
+      } else {
+        var img = $( "<img alt='" + title + "' width='300' height='270' style='display: none; padding: 8px;' />" )
+          .attr( "src", src ).appendTo( "body" );
+        setTimeout(function() {
+          img.dialog({
+            title: title,
+            width: 400,
+            modal: true
+          });
+        }, 1 );
+      }
+    }
+	
+	$("#process").click(function(event) {
+		var process = processes[0];
+		process.steps = [];
+		var temp_prev = null;
+		var temp_next = null;
+		$.each($array, function(index, value){
+			if(index == $array.length-1){
+				process.steps.push({
+                "objid": value,
+                "prev": temp_prev,
+                "next": null
+            });
+			}
+			else{
+				process.steps.push({
+					"objid": value,
+					"prev": temp_prev,
+					"next": $array[index + 1]
+				});
+			}
+			temp_prev = value;
+		}); 
+		$.ajax({
+			url: '/updateProcess',
+			data: JSON.stringify(process),
+			contentType : 'application/json',
+			type : 'POST',
+			success: function(response) {
+				console.log("success");
+			}
+		});
+	});
+ 
+    // Resolve the icons behavior with event delegation
+    $( "ul.gallery > li" ).on( "click", function( event ) {
+      var $item = $( this ),
+        $target = $( event.target );
+ 
+      if ( $target.is( "a.ui-icon-circle-arrow-e" ) ) {
+        addtoProcess( $item );
+      } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
+        viewLargerImage( $target );
+      } else if ( $target.is( "a.ui-icon-circle-arrow-w" ) ) {
+        removefromProcess( $item );
+      }
+ 
+      return false;
+    });
+	
+	
+		
+		
+
+  } );
+  </script>
 </head>
 <body>
 <div id="wrapper">
@@ -73,18 +255,84 @@
         </nav>
         <div id="page-wrapper" class="gray-bg dashbard-1">
        <div class="content-main">
-
-	    </div>
-		</div>
-		<div class="clearfix"> </div>
+			<!--banner-->	
+		     <div class="banner">
+		    	<h2>
+				<a href="process.html">Home</a>
+				<i class="fa fa-angle-right"></i>
+				<span>Process</span>
+				</h2>
+		    </div>
+		<!--//banner-->
+			<div class="ui-widget ui-helper-clearfix">
+ 
+<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+ 
+  <li class="ui-widget-content ui-corner-tr" id="1">
+    				<div class="blank-page">
+							<audio controls>
+							  <source src="images/a1.m4a">
+				 
+							</audio>
+							<img src="images/pic1.png" alt="" />
+							<div class="blank-page-des">
+								<h3>Lorem Ipsum is simply</h3>
+							</div>
+							
+						</div>
+		
+    <a href="link/to/process/script/when/we/have/js/off" title="Add to Process" class="ui-icon  ui-icon-circle-arrow-e">Add to Process</a>
+  </li>
+  <li class="ui-widget-content ui-corner-tr" id="2">
+    <div class="blank-page">
+							<audio controls>
+							  <source src="images/a3.m4a" type="audio/mp4">
+				 
+							</audio>
+							<img src="images/pic3.png" alt="" />
+							<div class="blank-page-des">
+								<h3>Lorem Ipsum is simply</h3>
+							</div>
+							
+						</div>
+			
+    <a href="link/to/process/script/when/we/have/js/off" title="Add to Process" class="ui-icon  ui-icon-circle-arrow-e">Add to Process</a>
+  </li>
+  <li class="ui-widget-content ui-corner-tr" id="3">
+    						<div class="blank-page">
+							<audio controls>
+							 
+							  <source src="images/a2.m4a" type="audio/mp4">
+				 
+							</audio>
+							<img src="images/pic2.png" alt="" />
+							<div class="blank-page-des">
+								<h3>Lorem Ipsum is simply</h3>
+							</div>
+							
+						</div>
+			
+    <a href="link/to/process/script/when/we/have/js/off" title="Add to Process" class="ui-icon  ui-icon-circle-arrow-e">Add to Process</a>
+  </li>
+</ul>
+ 
+<div id="process" class="ui-widget-content ui-state-default">
+  <h4 class="ui-widget-header"> Process </h4>
+  <a title="Save Process" class="save fa fa-floppy-o">  Save Process</a>
+</div>
+ 
+</div>
+			<div class="clearfix"> </div>
        </div>
      </div>
+	  
 <!---->
 <!--scrolling js-->
 	<script src="js/jquery.nicescroll.js"></script>
 	<script src="js/scripts.js"></script>
 	<!--//scrolling js-->
 	<script src="js/bootstrap.min.js"> </script>
+
 </body>
 </html>
 
